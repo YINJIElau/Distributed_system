@@ -1,0 +1,3 @@
+1. 当运行了Docker image时，按什么键让他停止
+
+2.Step6 取消spotify的注释是不是不能建立jar的package
