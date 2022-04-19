@@ -1,0 +1,112 @@
+swagger: "2.0"
+info:
+  description: "This is an online shopping service platform."
+  version: "1.0.0"
+  title: "Super Doge"
+host: "superdoge.com"
+basePath: "/shopping"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /product/name/{name}:
+    get:
+      summary: "get a product by name"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "name"
+          type: "string"
+          description: "Product name"
+          required: true
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+        default:
+          description: "Invalid input"
+          schema:
+            type: "string"
+  /product/category/{category}:
+    get:
+      summary: "get a product by category"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "category"
+          type: "string"
+          description: "Product category"
+          required: true
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+        default:
+          description: "Invalid input"
+          schema:
+            type: "string"
+  /product:
+    post:
+      description: "Add a new product"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Product object that needs to be added to the store"
+          required: true
+          schema:
+            $ref: "#/definitions/Product"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "string"
+        default:
+          description: "Invalid status value"
+          schema:
+            type: "string"
+definitions:
+  Product:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        description: "product id"
+      name:
+        type: "string"
+        description: "product name"
+      category:
+        type: "string"
+        description: "product category"
+        enum:
+          - "shoes"
+          - "clothes"
+          - "watch"
+      price:
+        type: "number"
+        description: "product price"
+      photo:
+        type: "string"
+        description: "Product photo"
